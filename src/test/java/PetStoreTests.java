@@ -4,14 +4,20 @@ import org.testng.annotations.Test;
 public class PetStoreTests {
     @Test
     public void getPetById200(){
-        RestAssured.given().baseUri(Config.PET_STORE_BASE_URI).get().then().statusCode(200);
-                //.and().extract().body();
+        RestAssured.given().baseUri(Config.PET_STORE_BASE_URI)
+                .baseUri("/pet/1")
+                .log().uri()
+                .then().statusCode(200);
+
 
     }
 
     @Test
     public void getPetById404(){
-        RestAssured.given().baseUri("https://petstore.swagger.io/v2/pet/0").get().then().statusCode(404);
+        RestAssured.given().baseUri(Config.PET_STORE_BASE_URI)
+                .baseUri("/pet/0")
+                .log().uri()
+                .then().statusCode(404);
 
     }
 }
