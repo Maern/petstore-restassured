@@ -4,7 +4,7 @@ import org.testng.annotations.Test;
 public class PetStoreTests {
     @Test
     public void getPetById200(){
-        RestAssured.given().baseUri("https://petstore.swagger.io/v2/pet/1").get().then().statusCode(200);
+        RestAssured.given().baseUri(Config.PET_STORE_BASE_URI).get().then().statusCode(200);
                 //.and().extract().body();
 
     }
