@@ -2,6 +2,8 @@ import org.testng.annotations.Test;
 
 import javax.xml.ws.Response;
 
+import static org.hamcrest.Matchers.is;
+
 public class PetStoreTests {
 
     final static PetEndpoint PET_ENDPOINT = new PetEndpoint(); //new constant variable from PetEndpoint
@@ -25,7 +27,7 @@ public class PetStoreTests {
     }
 
     @Test
-    public void getPetByStatus(){
+    public void getPetByStatus() {
         PET_ENDPOINT
                 .getPetByStatus("available")
                 .then()
@@ -33,11 +35,13 @@ public class PetStoreTests {
     }
 
     @Test
-    public void createPet(){
-        PetEntity petEntity = new PetEntity(205,"kotya","available");
+    public void createPet() {
+        int petId = 207;
+        PetEntity petEntity = new PetEntity(petId, "kotya", "available");
         PET_ENDPOINT
                 .createPetInStore(petEntity)
                 .then()
-                .statusCode(200);
+                .statusCode(200)
+                .and().body("id", is(petId));
     }
 }
