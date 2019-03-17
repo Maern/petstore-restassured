@@ -6,6 +6,7 @@ public class PetEndpoint {
     private RequestSpecification given() {
         return RestAssured.given()
                 .baseUri(Config.PET_STORE_BASE_URI)
+                .contentType("application/json") //adding header for sending json only
                 .log().uri();
 
     }
@@ -22,9 +23,16 @@ public class PetEndpoint {
         return given()
                 .basePath(Config.GET_PET_BY_STATUS)
                 .param("status","available")
-                //.pathParam("status",petStatus)
                 .get()
                 .then().extract().response();
 
+    }
+
+    public Response createPetInStore(String body){
+        return given()
+                .basePath(Config.CREATE_PET)
+                .body(body)
+                .post()
+                .then().extract().response();
     }
 }
