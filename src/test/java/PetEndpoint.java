@@ -1,8 +1,11 @@
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
+import net.thucydides.core.annotations.Step;
+
 
 public class PetEndpoint {
+
     private RequestSpecification given() {
         return RestAssured.given()
                 .baseUri(Config.PET_STORE_BASE_URI)
@@ -10,7 +13,7 @@ public class PetEndpoint {
                 .log().uri();
 
     }
-
+@Step
     public Response getPetById(int petId) {
         return given()
                 .basePath(Config.GET_PET_BY_ID)
@@ -18,7 +21,7 @@ public class PetEndpoint {
                 .get()
                 .then().extract().response();
     }
-
+@Step
     public Response getPetByStatus(String status) {
         return given()
                 .basePath(Config.GET_PET_BY_STATUS)
@@ -27,7 +30,7 @@ public class PetEndpoint {
                 .then().extract().response();
 
     }
-
+@Step
     public Response createPetInStore(PetEntity petEntity){
         return given()
                 .basePath(Config.CREATE_PET)

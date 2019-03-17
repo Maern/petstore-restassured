@@ -1,17 +1,24 @@
-import org.testng.annotations.Test;
+import io.restassured.response.ValidatableResponse;
+import net.serenitybdd.junit.runners.SerenityRunner;
+import net.thucydides.core.annotations.Steps;
+import org.junit.Test;
+import org.junit.runner.RunWith;
 
-import javax.xml.ws.Response;
 
 import static org.hamcrest.Matchers.is;
 
+@RunWith(SerenityRunner.class)
 public class PetStoreTests {
 
-    final static PetEndpoint PET_ENDPOINT = new PetEndpoint(); //new constant variable from PetEndpoint
+    //final static PetEndpoint PET_ENDPOINT = new PetEndpoint(); //new constant variable from PetEndpoint
+
+    @Steps
+    protected PetEndpoint petEndpoint;
 
     @Test
     public void getPetById200() {
-        PET_ENDPOINT
-                .getPetById(205)
+        petEndpoint
+                .getPetById(207)
                 .then()
                 .statusCode(200);
 
@@ -19,7 +26,7 @@ public class PetStoreTests {
 
     @Test
     public void getPetById404() {
-        PET_ENDPOINT
+        petEndpoint
                 .getPetById(0)
                 .then()
                 .statusCode(404);
@@ -28,7 +35,7 @@ public class PetStoreTests {
 
     @Test
     public void getPetByStatus() {
-        PET_ENDPOINT
+        petEndpoint
                 .getPetByStatus("available")
                 .then()
                 .statusCode(200);
@@ -36,9 +43,9 @@ public class PetStoreTests {
 
     @Test
     public void createPet() {
-        int petId = 207;
-        PetEntity petEntity = new PetEntity(petId, "kotya", "available");
-        PET_ENDPOINT
+        int petId = 208;
+        PetEntity petEntity = new PetEntity(petId, "neko", "available");
+        ValidatableResponse() = new petEndpoint
                 .createPetInStore(petEntity)
                 .then()
                 .statusCode(200)
