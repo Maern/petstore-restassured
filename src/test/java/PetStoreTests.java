@@ -1,14 +1,12 @@
-import io.restassured.RestAssured;
-import io.restassured.specification.RequestSpecification;
 import org.testng.annotations.Test;
 
 public class PetStoreTests {
+
+    final PetEndpoint PET_ENDPOINT = new PetEndpoint(); //new static variable from PetEndpoint
+
     @Test
     public void getPetById200() {
-        baseSpecification()
-                .basePath(Config.GET_PET_ENDPOINT)
-                .pathParam("id", 1)
-                .get()
+        PET_ENDPOINT.getPetById(1)
                 .then()
                 .statusCode(200);
 
@@ -17,19 +15,11 @@ public class PetStoreTests {
 
     @Test
     public void getPetById404() {
-        baseSpecification()
-                .basePath(Config.GET_PET_ENDPOINT)
-                .pathParam("id", 0)
-                .get()
+        PET_ENDPOINT.getPetById(2)
                 .then()
                 .statusCode(404);
 
     }
 
-    private RequestSpecification baseSpecification() {
-        return RestAssured.given()
-                .baseUri(Config.PET_STORE_BASE_URI)
-                .log().uri();
 
-    }
 }
