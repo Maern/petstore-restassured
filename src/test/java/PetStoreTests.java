@@ -9,7 +9,7 @@ public class PetStoreTests {
     @Test
     public void getPetById200() {
         PET_ENDPOINT
-                .getPetById(206)
+                .getPetById(205)
                 .then()
                 .statusCode(200);
 
