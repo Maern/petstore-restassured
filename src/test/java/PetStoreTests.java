@@ -34,26 +34,9 @@ public class PetStoreTests {
 
     @Test
     public void createPet(){
-        String body = "{\n" +
-                "  \"id\": 206,\n" +
-                "  \"category\": {\n" +
-                "    \"id\": 206,\n" +
-                "    \"name\": \"cat\"\n" +
-                "  },\n" +
-                "  \"name\": \"hello_kitty\",\n" +
-                "  \"photoUrls\": [\n" +
-                "    \"string\"\n" +
-                "  ],\n" +
-                "  \"tags\": [\n" +
-                "    {\n" +
-                "      \"id\": 13,\n" +
-                "      \"name\": \"string\"\n" +
-                "    }\n" +
-                "  ],\n" +
-                "  \"status\": \"available\"\n" +
-                "}";
+        PetEntity petEntity = new PetEntity(205,"kotya","available");
         PET_ENDPOINT
-                .createPetInStore(body)
+                .createPetInStore(petEntity)
                 .then()
                 .statusCode(200);
     }

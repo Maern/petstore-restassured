@@ -28,10 +28,10 @@ public class PetEndpoint {
 
     }
 
-    public Response createPetInStore(String body){
+    public Response createPetInStore(PetEntity petEntity){
         return given()
                 .basePath(Config.CREATE_PET)
-                .body(body)
+                .body(petEntity)
                 .post()
                 .then().extract().response();
     }
